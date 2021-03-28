@@ -1,0 +1,5 @@
+---
+# set_ntp_servers_for_chrony/vars/vars_Debian.yml
+
+# chrony settings
+path_to_chrony_conf: '/etc/chrony/chrony.conf'
