@@ -1,0 +1,37 @@
+---
+# set_ntp_servers_for_chrony/tasks/main.yml
+
+- name: "Remove /etc/chrony.d/opensuse.conf"
+  file:
+    path: "/etc/chrony.d/opensuse.conf"
+    state: "absent"
+  notify:
+    - 'Restart chrony service'
+
+- name: "Create configuration file for chrony (when not on Debian)"
+  template:
+    src: "etc_chrony.d_upstream_servers.conf.j2"
+    dest: "/etc/chrony.d/upstream_servers.conf"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  when: 'ansible_distribution != "Debian"'
+  notify:
+    - 'Restart chrony service'
+
+- name: 'Create {{ path_to_chrony_conf }} on Debian'
+  template:
+    src: 'Debian/etc_chrony.conf.j2'
+    dest: "{{ path_to_chrony_conf }}"
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  when: 'ansible_distribution == "Debian"'
+  notify:
+    - 'Restart chrony service'
+
+- name: 'Enable and start chrony service'
+  service:
+    name: "{{ chrony_service }}"
+    state: 'started'
+    enabled: 'true'
