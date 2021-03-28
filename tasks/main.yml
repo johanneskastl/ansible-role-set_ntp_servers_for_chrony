@@ -1,6 +1,12 @@
 ---
 # set_ntp_servers_for_chrony/tasks/main.yml
 
+- name: "Load variables"
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "vars_{{ ansible_distribution }}.yml"
+    - "vars_{{ ansible_os_family }}.yml"
+
 - name: "Remove /etc/chrony.d/opensuse.conf"
   file:
     path: "/etc/chrony.d/opensuse.conf"
