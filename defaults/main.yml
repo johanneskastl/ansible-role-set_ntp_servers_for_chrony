@@ -1,0 +1,10 @@
+---
+# set_ntp_servers_for_chrony/defaults/main.yml
+
+chrony_service: 'chronyd'
+
+list_of_ntp_servers:
+  - 'ntp1.fau.de'
+  - 'ntp2.fau.de'
+  - 'ntp3.fau.de'
+  - 'ntp4.fau.de'
