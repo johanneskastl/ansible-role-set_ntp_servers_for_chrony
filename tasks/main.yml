@@ -45,6 +45,28 @@
   notify:
     - 'Restart chrony service'
 
+- name: 'Remove pool lines from chrony.conf'
+  lineinfile:
+    path: "{{ path_to_chrony_conf }}"
+    regex: '^pool'
+    state: 'absent'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify:
+    - 'Restart chrony service'
+
+- name: 'Remove server lines from chrony.conf'
+  lineinfile:
+    path: "{{ path_to_chrony_conf }}"
+    regex: '^server'
+    state: 'absent'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify:
+    - 'Restart chrony service'
+
 - name: 'Enable and start chrony service'
   service:
     name: "{{ chrony_service }}"
