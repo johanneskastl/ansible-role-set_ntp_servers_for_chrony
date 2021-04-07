@@ -25,7 +25,7 @@
 
 - name: 'Create configuration file for chrony (when not on Debian)'
   template:
-    src: 'etc_chrony.d_upstream_servers.conf.j2'
+    src: 'chrony.d_upstream_servers.conf.j2'
     dest: '/etc/chrony.d/upstream_servers.conf'
     owner: 'root'
     group: 'root'
