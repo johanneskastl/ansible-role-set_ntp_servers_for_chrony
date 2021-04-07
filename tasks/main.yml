@@ -33,10 +33,12 @@
   notify:
     - 'Restart chrony service'
 
-- name: 'Create {{ path_to_chrony_conf }} on Debian'
-  template:
-    src: 'Debian/etc_chrony.conf.j2'
-    dest: "{{ path_to_chrony_conf }}"
+- name: 'Add include option to chrony.conf on Debian'
+  lineinfile:
+    path: "{{ path_to_chrony_conf }}"
+    regex: '^include /etc/chrony/chrony.d/*.conf'
+    line: "include {{ path_to_chrony_d_directory }}/*.conf"
+    create: 'true'
     owner: 'root'
     group: 'root'
     mode: '0644'
