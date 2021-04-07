@@ -1,26 +1,26 @@
 ---
 # set_ntp_servers_for_chrony/tasks/main.yml
 
-- name: "Load variables"
+- name: 'Load variables'
   include_vars: "{{ item }}"
   with_first_found:
     - "vars_{{ ansible_distribution }}.yml"
     - "vars_{{ ansible_os_family }}.yml"
 
-- name: "Remove /etc/chrony.d/opensuse.conf"
+- name: 'Remove /etc/chrony.d/opensuse.conf'
   file:
-    path: "/etc/chrony.d/opensuse.conf"
-    state: "absent"
+    path: '/etc/chrony.d/opensuse.conf'
+    state: 'absent'
   notify:
     - 'Restart chrony service'
 
-- name: "Create configuration file for chrony (when not on Debian)"
+- name: 'Create configuration file for chrony (when not on Debian)'
   template:
-    src: "etc_chrony.d_upstream_servers.conf.j2"
-    dest: "/etc/chrony.d/upstream_servers.conf"
-    owner: "root"
-    group: "root"
-    mode: "0644"
+    src: 'etc_chrony.d_upstream_servers.conf.j2'
+    dest: '/etc/chrony.d/upstream_servers.conf'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
   when: 'ansible_distribution != "Debian"'
   notify:
     - 'Restart chrony service'
