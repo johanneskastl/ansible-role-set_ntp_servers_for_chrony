@@ -23,14 +23,13 @@
     mode: '0755'
   when: 'ansible_distribution == "Debian"'
 
-- name: 'Create configuration file for chrony (when not on Debian)'
+- name: 'Create configuration file upstream_servers.conf for chrony'
   template:
     src: 'chrony.d_upstream_servers.conf.j2'
     dest: "{{ path_to_chrony_d_directory }}/upstream_servers.conf"
     owner: 'root'
     group: 'root'
     mode: '0644'
-  when: 'ansible_distribution != "Debian"'
   notify:
     - 'Restart chrony service'
 
