@@ -34,11 +34,10 @@
     - 'Restart chrony service'
 
 - name: 'Add include option to chrony.conf on Debian'
-  lineinfile:
+  blockinfile:
     path: "{{ path_to_chrony_conf }}"
-    regex: '^include /etc/chrony/chrony.d/*.conf'
-    line: "include {{ path_to_chrony_d_directory }}/*.conf"
-    create: 'true'
+    block: |
+      include {{ path_to_chrony_d_directory }}/*.conf
     owner: 'root'
     group: 'root'
     mode: '0644'
