@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: 'set_ntp_servers_for_chrony'
+  namespace: 'johanneskastl'
   author: 'Johannes Kastl'
   description: 'Set ntp servers for chrony'
   company: 'B1 Systems GmbH'
