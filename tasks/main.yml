@@ -2,20 +2,20 @@
 # set_ntp_servers_for_chrony/tasks/main.yml
 
 - name: 'Load variables'
-  include_vars: "{{ item }}"
+  ansible.builtin.include_vars: "{{ item }}"
   with_first_found:
     - "vars_{{ ansible_distribution }}.yml"
     - "vars_{{ ansible_os_family }}.yml"
 
 - name: 'Remove /etc/chrony.d/opensuse.conf'
-  file:
+  ansible.builtin.file:
     path: '/etc/chrony.d/opensuse.conf'
     state: 'absent'
   notify:
     - 'Restart chrony service'
 
 - name: "Create directory {{ path_to_chrony_d_directory }} on Debian"
-  file:
+  ansible.builtin.file:
     path: "{{ path_to_chrony_d_directory }}"
     state: 'directory'
     owner: 'root'
@@ -24,7 +24,7 @@
   when: 'ansible_distribution == "Debian"'
 
 - name: 'Create configuration file upstream_servers.conf for chrony'
-  template:
+  ansible.builtin.template:
     src: 'chrony.d_upstream_servers.conf.j2'
     dest: "{{ path_to_chrony_d_directory }}/upstream_servers.conf"
     owner: 'root'
@@ -34,7 +34,7 @@
     - 'Restart chrony service'
 
 - name: 'Add include option to chrony.conf on Debian'
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: "{{ path_to_chrony_conf }}"
     block: |
       include {{ path_to_chrony_d_directory }}/*.conf
@@ -46,7 +46,7 @@
     - 'Restart chrony service'
 
 - name: 'Remove pool lines from chrony.conf'
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: "{{ path_to_chrony_conf }}"
     regex: '^pool'
     state: 'absent'
@@ -57,7 +57,7 @@
     - 'Restart chrony service'
 
 - name: 'Remove server lines from chrony.conf'
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: "{{ path_to_chrony_conf }}"
     regex: '^server'
     state: 'absent'
@@ -68,7 +68,7 @@
     - 'Restart chrony service'
 
 - name: 'Enable and start chrony service'
-  service:
+  ansible.builtin.service:
     name: "{{ chrony_service }}"
     state: 'started'
     enabled: 'true'
