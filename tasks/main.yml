@@ -14,7 +14,7 @@
   notify:
     - 'Restart chrony service'
 
-- name: "Create directory {{ path_to_chrony_d_directory }} on Debian"
+- name: "Create directory {{ path_to_chrony_d_directory }} on Debian or RedHat/CentOS/RockyLinux/AlmaLinux"
   ansible.builtin.file:
     path: "{{ path_to_chrony_d_directory }}"
     state: 'directory'
@@ -24,6 +24,8 @@
   when:
     '
     ansible_os_family == "Debian"
+    or ansible_os_family == "RedHat"
+    or ansible_os_family == "Rocky"
     '
 
 - name: 'Create configuration file upstream_servers.conf for chrony'
@@ -36,7 +38,7 @@
   notify:
     - 'Restart chrony service'
 
-- name: 'Add include option to chrony.conf on Debian'
+- name: 'Add include option to chrony.conf on Debian or RedHat/CentOS/RockyLinux/AlmaLinux'
   ansible.builtin.blockinfile:
     path: "{{ path_to_chrony_conf }}"
     block: |
@@ -47,6 +49,8 @@
   when:
     '
     ansible_os_family == "Debian"
+    or ansible_os_family == "RedHat"
+    or ansible_os_family == "Rocky"
     '
   notify:
     - 'Restart chrony service'
