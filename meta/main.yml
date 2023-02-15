@@ -19,6 +19,9 @@ galaxy_info:
     - name: Debian
       versions:
         - all
+    - name: Fedora
+      versions:
+        - all
     - name: opensuse
       versions:
         - 15
