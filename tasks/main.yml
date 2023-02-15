@@ -14,7 +14,7 @@
   notify:
     - 'Restart chrony service'
 
-- name: "Create directory {{ path_to_chrony_d_directory }} on Debian or RedHat/CentOS/RockyLinux/AlmaLinux"
+- name: "Create chrony.d directory on Debian or RedHat/CentOS/RockyLinux/AlmaLinux"
   ansible.builtin.file:
     path: "{{ path_to_chrony_d_directory }}"
     state: 'directory'
