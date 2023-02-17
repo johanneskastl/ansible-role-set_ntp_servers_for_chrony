@@ -32,6 +32,10 @@ galaxy_info:
     - name: SLES
       versions:
         - '15'
+        - '15SP1'
+        - '15SP2'
+        - '15SP3'
+        - '15SP4'
     - name: Ubuntu
       versions:
         - all
