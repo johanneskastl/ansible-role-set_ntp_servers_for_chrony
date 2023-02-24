@@ -26,7 +26,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: 'johanneskastl.set_ntp_servers_for_chrony' }
+         - role: 'johanneskastl.set_ntp_servers_for_chrony'
 
 License
 -------
