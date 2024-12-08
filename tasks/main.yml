@@ -26,6 +26,7 @@
     ansible_os_family == "Debian"
     or ansible_os_family == "RedHat"
     or ansible_os_family == "Rocky"
+    or ansible_os_family == "Nobara"
     '
 
 - name: 'Create configuration file upstream_servers.conf for chrony'
@@ -51,6 +52,7 @@
     ansible_os_family == "Debian"
     or ansible_os_family == "RedHat"
     or ansible_os_family == "Rocky"
+    or ansible_os_family == "Nobara"
     '
   notify:
     - 'Restart chrony service'
