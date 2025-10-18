@@ -1,7 +1,7 @@
 ---
 # set_ntp_servers_for_chrony/handlers/main.yml
 
-- name: 'Restart chrony service'
+- name: Restart chrony service
   ansible.builtin.service:
     name: "{{ chrony_service }}"
-    state: "restarted"
+    state: restarted
