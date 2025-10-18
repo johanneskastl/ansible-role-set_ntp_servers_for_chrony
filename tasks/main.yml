@@ -1,25 +1,25 @@
 ---
 # set_ntp_servers_for_chrony/tasks/main.yml
 
-- name: 'Load variables'
+- name: Load variables
   ansible.builtin.include_vars: "{{ item }}"
   with_first_found:
     - "vars_{{ ansible_distribution | replace(' ', '_') }}.yml"
     - "vars_{{ ansible_os_family | replace(' ', '_') }}.yml"
 
-- name: 'Remove /etc/chrony.d/opensuse.conf'
+- name: Remove /etc/chrony.d/opensuse.conf
   ansible.builtin.file:
-    path: '/etc/chrony.d/opensuse.conf'
-    state: 'absent'
+    path: /etc/chrony.d/opensuse.conf
+    state: absent
   notify:
-    - 'Restart chrony service'
+    - Restart chrony service
 
 - name: "Create chrony.d directory on Debian or RedHat/CentOS/RockyLinux/AlmaLinux"
   ansible.builtin.file:
     path: "{{ path_to_chrony_d_directory }}"
-    state: 'directory'
-    owner: 'root'
-    group: 'root'
+    state: directory
+    owner: root
+    group: root
     mode: '0755'
   when:
     '
@@ -29,23 +29,23 @@
     or ansible_os_family == "Nobara"
     '
 
-- name: 'Create configuration file upstream_servers.conf for chrony'
+- name: Create configuration file upstream_servers.conf for chrony
   ansible.builtin.template:
-    src: 'chrony.d_upstream_servers.conf.j2'
+    src: chrony.d_upstream_servers.conf.j2
     dest: "{{ path_to_chrony_d_directory }}/upstream_servers.conf"
-    owner: 'root'
-    group: 'root'
+    owner: root
+    group: root
     mode: '0644'
   notify:
-    - 'Restart chrony service'
+    - Restart chrony service
 
-- name: 'Add include option to chrony.conf on Debian or RedHat/CentOS/RockyLinux/AlmaLinux'
+- name: Add include option to chrony.conf on Debian or RedHat/CentOS/RockyLinux/AlmaLinux
   ansible.builtin.blockinfile:
     path: "{{ path_to_chrony_conf }}"
     block: |
       include {{ path_to_chrony_d_directory }}/*.conf
-    owner: 'root'
-    group: 'root'
+    owner: root
+    group: root
     mode: '0644'
   when:
     '
@@ -55,32 +55,32 @@
     or ansible_os_family == "Nobara"
     '
   notify:
-    - 'Restart chrony service'
+    - Restart chrony service
 
-- name: 'Remove pool lines from chrony.conf'
+- name: Remove pool lines from chrony.conf
   ansible.builtin.lineinfile:
     path: "{{ path_to_chrony_conf }}"
-    regex: '^pool'
-    state: 'absent'
-    owner: 'root'
-    group: 'root'
+    regex: ^pool
+    state: absent
+    owner: root
+    group: root
     mode: '0644'
   notify:
-    - 'Restart chrony service'
+    - Restart chrony service
 
-- name: 'Remove server lines from chrony.conf'
+- name: Remove server lines from chrony.conf
   ansible.builtin.lineinfile:
     path: "{{ path_to_chrony_conf }}"
-    regex: '^server'
-    state: 'absent'
-    owner: 'root'
-    group: 'root'
+    regex: ^server
+    state: absent
+    owner: root
+    group: root
     mode: '0644'
   notify:
-    - 'Restart chrony service'
+    - Restart chrony service
 
-- name: 'Enable and start chrony service'
+- name: Enable and start chrony service
   ansible.builtin.service:
     name: "{{ chrony_service }}"
-    state: 'started'
-    enabled: 'true'
+    state: started
+    enabled: true
