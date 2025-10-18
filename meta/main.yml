@@ -44,3 +44,4 @@ galaxy_info:
 
 dependencies:
   - role: 'johanneskastl.install_chrony'
+    tags: dependent_role
