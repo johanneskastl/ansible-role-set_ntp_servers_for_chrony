@@ -1,0 +1,6 @@
+---
+# set_ntp_servers_for_chrony/vars/vars_Alpine.yml
+
+# chrony settings
+path_to_chrony_conf: '/etc/chrony/chrony.conf'
+path_to_chrony_d_directory: '/etc/chrony.d'
