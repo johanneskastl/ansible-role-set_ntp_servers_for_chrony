@@ -18,8 +18,8 @@
   ansible.builtin.file:
     path: "{{ path_to_chrony_d_directory }}"
     state: directory
-    owner: root
-    group: root
+    owner: "{{ set_ntp_servers_for_chrony_owner }}"
+    group: "{{ set_ntp_servers_for_chrony_group }}"
     mode: '0755'
   when:
     '
@@ -33,8 +33,8 @@
   ansible.builtin.template:
     src: chrony.d_upstream_servers.conf.j2
     dest: "{{ path_to_chrony_d_directory }}/upstream_servers.conf"
-    owner: root
-    group: root
+    owner: "{{ set_ntp_servers_for_chrony_owner }}"
+    group: "{{ set_ntp_servers_for_chrony_group }}"
     mode: '0644'
   notify:
     - Restart chrony service
@@ -44,8 +44,8 @@
     path: "{{ path_to_chrony_conf }}"
     block: |
       include {{ path_to_chrony_d_directory }}/*.conf
-    owner: root
-    group: root
+    owner: "{{ set_ntp_servers_for_chrony_owner }}"
+    group: "{{ set_ntp_servers_for_chrony_group }}"
     mode: '0644'
   when:
     '
@@ -62,8 +62,8 @@
     path: "{{ path_to_chrony_conf }}"
     regex: ^pool
     state: absent
-    owner: root
-    group: root
+    owner: "{{ set_ntp_servers_for_chrony_owner }}"
+    group: "{{ set_ntp_servers_for_chrony_group }}"
     mode: '0644'
   notify:
     - Restart chrony service
@@ -73,8 +73,8 @@
     path: "{{ path_to_chrony_conf }}"
     regex: ^server
     state: absent
-    owner: root
-    group: root
+    owner: "{{ set_ntp_servers_for_chrony_owner }}"
+    group: "{{ set_ntp_servers_for_chrony_group }}"
     mode: '0644'
   notify:
     - Restart chrony service
