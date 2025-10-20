@@ -1,0 +1,9 @@
+---
+# set_ntp_servers_for_chrony/vars/vars_FreeBSD.yml
+
+# chrony settings
+path_to_chrony_conf: '/usr/local/etc/chrony.conf'
+path_to_chrony_d_directory: '/usr/local/etc/chrony.d'
+
+# group 0 is called wheel
+set_ntp_servers_for_chrony_group: wheel
