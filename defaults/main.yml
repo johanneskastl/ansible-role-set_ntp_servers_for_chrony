@@ -3,6 +3,9 @@
 
 chrony_service: 'chronyd'
 
+set_ntp_servers_for_chrony_owner: root
+set_ntp_servers_for_chrony_group: root
+
 list_of_ntp_servers:
   - 'ntp1.fau.de'
   - 'ntp2.fau.de'
