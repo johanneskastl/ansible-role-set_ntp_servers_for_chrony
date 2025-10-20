@@ -14,7 +14,7 @@
   notify:
     - Restart chrony service
 
-- name: "Create chrony.d directory on Debian or RedHat/CentOS/RockyLinux/AlmaLinux"
+- name: "Create chrony.d directory on Debian, RedHat/CentOS/RockyLinux/AlmaLinux/Nobara or FreeBSD"
   ansible.builtin.file:
     path: "{{ path_to_chrony_d_directory }}"
     state: directory
@@ -27,6 +27,7 @@
     or ansible_os_family == "RedHat"
     or ansible_os_family == "Rocky"
     or ansible_os_family == "Nobara"
+    or ansible_os_family == "FreeBSD"
     '
 
 - name: Create configuration file upstream_servers.conf for chrony
