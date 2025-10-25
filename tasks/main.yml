@@ -27,6 +27,7 @@
     or ansible_os_family == "RedHat"
     or ansible_os_family == "Rocky"
     or ansible_os_family == "Nobara"
+    or ansible_os_family == "Alpine"
     or ansible_os_family == "FreeBSD"
     '
 
@@ -54,6 +55,7 @@
     or ansible_os_family == "RedHat"
     or ansible_os_family == "Rocky"
     or ansible_os_family == "Nobara"
+    or ansible_os_family == "Alpine"
     '
   notify:
     - Restart chrony service
