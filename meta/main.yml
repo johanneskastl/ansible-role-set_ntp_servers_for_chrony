@@ -12,9 +12,7 @@ galaxy_info:
     # EL includes RHEL, CentOS, RockyLinux, AlmaLinux etc.
     - name: EL
       versions:
-        - '7'
-        - '8'
-        - '9'
+        - all
     - name: Debian
       versions:
         - all
@@ -23,18 +21,10 @@ galaxy_info:
         - all
     - name: opensuse
       versions:
-        - '15.0'
-        - '15.1'
-        - '15.2'
-        - '15.3'
-        - '15.4'
+        - all
     - name: SLES
       versions:
-        - '15'
-        - '15SP1'
-        - '15SP2'
-        - '15SP3'
-        - '15SP4'
+        - all
     - name: Ubuntu
       versions:
         - all
